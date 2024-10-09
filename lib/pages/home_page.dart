@@ -1,6 +1,8 @@
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:travelling_app/pages/components/my_appbar.dart';
 import 'package:travelling_app/utils/colors.dart';
+import 'package:travelling_app/utils/my_space.dart';
 import 'package:travelling_app/utils/my_text.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,33 +26,58 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            spaceHeight(5),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                  flex: 1,
+                  flex: 6,
                   child: Container(
-                    margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(50),
                       border: Border.all(color: greyC_200, width: 1.5),
                     ),
-                    child: const TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        hintStyle: TextStyle(color: greyC_800, fontSize: 17),
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: blackC_400,
-                          size: 26,
+                    child: const SizedBox(
+                      height: 45,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Search',
+                          hintStyle: TextStyle(color: greyC_800, fontSize: 17),
+                          border: InputBorder.none,
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: blackC_400,
+                            size: 26,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
+                spaceWidth(5),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                      color: primaryC,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(
+                        CommunityMaterialIcons.filter_variant,
+                        size: 28,
+                        color: whiteC,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
+            spaceHeight(20),
             CustomText(
               text: "Categories",
               color: blackC,

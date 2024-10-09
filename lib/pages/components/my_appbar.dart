@@ -9,7 +9,7 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      // backgroundColor: secondaryC,
+      backgroundColor: secondaryC,
       centerTitle: false,
       title: Padding(
         padding: const EdgeInsets.only(left: 5),
