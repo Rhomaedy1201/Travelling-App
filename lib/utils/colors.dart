@@ -5,6 +5,7 @@ const primaryC_200 = Color(0x4B0090A0);
 const secondaryC = Color(0xFFF7F7F7);
 const greyC = Color(0xFFAFAFAF);
 const greyC_800 = Color(0xFFA2A2A2);
+const greyC_400 = Color(0xFFD2D2D2);
 const whiteC = Color(0xFFFFFFFF);
 const blackC = Color(0xFF000000);
 const blackC_800 = Color(0xFF1E1E1E);
