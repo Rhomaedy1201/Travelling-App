@@ -18,7 +18,7 @@ class MyAppBar extends StatelessWidget {
           children: [
             CustomText(
               text: "Location",
-              color: greyC_800,
+              color: Colors.grey,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),

@@ -1,6 +1,8 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:travelling_app/pages/components/my_appbar.dart';
+import 'package:travelling_app/pages/components/my_section.dart';
+import 'package:travelling_app/utils/categories_items.dart';
 import 'package:travelling_app/utils/colors.dart';
 import 'package:travelling_app/utils/my_space.dart';
 import 'package:travelling_app/utils/my_text.dart';
@@ -13,6 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int categoriesIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +24,13 @@ class _HomePageState extends State<HomePage> {
         preferredSize: Size(double.infinity, 65),
         child: MyAppBar(),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            spaceHeight(5),
-            Row(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          spaceHeight(5),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -77,15 +80,84 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-            spaceHeight(20),
-            CustomText(
-              text: "Categories",
-              color: blackC,
-              fontSize: 16,
-              fontWeight: FontWeight.w800,
-            )
-          ],
-        ),
+          ),
+          spaceHeight(20),
+          MySection(title: "Categories"),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: SizedBox(
+              width: double.infinity,
+              height: 45,
+              child: ListView.builder(
+                itemCount: CategoriesItems().items.length,
+                shrinkWrap: true,
+                padding: const EdgeInsets.only(left: 16),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 4),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          categoriesIndex = index;
+                        });
+                      },
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.linear,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: whiteC,
+                          border: Border.all(
+                            color:
+                                categoriesIndex == index ? primaryC : greyC_200,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              right: categoriesIndex == index ? 10 : 20),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 45,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  color: categoriesIndex == index
+                                      ? primaryC
+                                      : whiteC,
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                child: Icon(
+                                  CategoriesItems().items[index]['icon'],
+                                  color: categoriesIndex == index
+                                      ? whiteC
+                                      : primaryC,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal:
+                                        categoriesIndex == index ? 10 : 0),
+                                child: CustomText(
+                                  text: CategoriesItems().items[index]['title'],
+                                  color: blackC_600,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+          MySection(title: "Top Trips"),
+          MySection(title: "Group Trips"),
+        ],
       ),
     );
   }
