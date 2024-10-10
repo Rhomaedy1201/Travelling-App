@@ -1,5 +1,5 @@
 class TopTripsItems {
-  List items = [
+  List<Map<String, dynamic>> items = [
     {
       "image": "assets/images/redfish_lake.png",
       "title": "Redfish Lake",
