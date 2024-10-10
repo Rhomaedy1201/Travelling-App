@@ -6,6 +6,7 @@ import 'package:travelling_app/utils/categories_items.dart';
 import 'package:travelling_app/utils/colors.dart';
 import 'package:travelling_app/utils/my_space.dart';
 import 'package:travelling_app/utils/my_text.dart';
+import 'package:travelling_app/utils/top_trips_items.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -156,6 +157,149 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           MySection(title: "Top Trips"),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: SizedBox(
+              height: 210,
+              child: ListView.builder(
+                padding: const EdgeInsets.only(left: 20),
+                itemCount: TopTripsItems().items.length,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Container(
+                    width: 150,
+                    height: 212,
+                    margin: const EdgeInsets.only(right: 15),
+                    decoration: BoxDecoration(
+                      color: whiteC,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                height: 110,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: greyC_400,
+                                      blurRadius: 6,
+                                      offset: Offset(0, 4),
+                                    )
+                                  ],
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        TopTripsItems().items[index]['image']),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              spaceHeight(8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CustomText(
+                                    text: TopTripsItems().items[index]['title'],
+                                    color: blackC,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.star,
+                                        color: Colors.amberAccent,
+                                        size: 12,
+                                      ),
+                                      CustomText(
+                                        text: TopTripsItems().items[index]
+                                            ['rating'],
+                                        color: blackC_400,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.location_on_rounded,
+                                color: greyC_800,
+                                size: 18,
+                              ),
+                              spaceWidth(2),
+                              CustomText(
+                                text: TopTripsItems().items[index]['location'],
+                                color: blackC_400,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  CustomText(
+                                    text:
+                                        "\$${TopTripsItems().items[index]['price']}",
+                                    color: primaryC,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  spaceWidth(2),
+                                  CustomText(
+                                    text: "/Visit",
+                                    color: blackC,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ],
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    TopTripsItems().items[index]['favorite'] =
+                                        !TopTripsItems().items[index]
+                                            ['favorite'];
+                                  });
+                                  print(
+                                      TopTripsItems().items[index]['favorite']);
+                                },
+                                child: Icon(
+                                  TopTripsItems().items[index]['favorite']
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  size: 24,
+                                  color: TopTripsItems().items[index]
+                                          ['favorite']
+                                      ? primaryC
+                                      : blackC_400,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
           MySection(title: "Group Trips"),
         ],
       ),
